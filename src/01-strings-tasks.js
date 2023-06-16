@@ -251,8 +251,23 @@ function getRectangleString(width, height) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const alphabet = 'A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z';
+  const encryptedAlphabet = 'N, O, P, Q, R, S, T, U, V, W, X, Y, Z, A, B, C, D, E, F, G, H, I, J, K, L, M, n, o, p, q, r, s, t, u, v, w, x, y, z, a, b, c, d, e, f, g, h, i, j, k, l, m';
+  const arrayAlphabet = alphabet.split(', ');
+  const arrayEncryptedAlphabet = encryptedAlphabet.split(', ');
+  const arrayStr = str.split('');
+  const arrayNewStr = [];
+  let letterIndex;
+
+  for (let i = 0; i < arrayStr.length; i = i + 1) {
+    arrayAlphabet.map((el) => (el === arrayStr[i] ? letterIndex = arrayAlphabet.indexOf(el) : -1));
+    if (letterIndex !== -1) {
+      arrayNewStr.push(arrayEncryptedAlphabet[letterIndex]);
+    }
+  }
+
+  return arrayNewStr.join('');
 }
 
 /**
