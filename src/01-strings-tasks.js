@@ -258,12 +258,26 @@ function encodeToRot13(str) {
   const arrayEncryptedAlphabet = encryptedAlphabet.split(', ');
   const arrayStr = str.split('');
   const arrayNewStr = [];
-  let letterIndex;
 
-  for (let i = 0; i < arrayStr.length; i = i + 1) {
-    arrayAlphabet.map((el) => (el === arrayStr[i] ? letterIndex = arrayAlphabet.indexOf(el) : -1));
+  for (let i = 0; i < arrayStr.length; i += 1) {
+    let letterIndex;
+    arrayAlphabet.map((el) => {
+      if (el === arrayStr[i]) {
+        letterIndex = arrayAlphabet.indexOf(el);
+      }
+      return letterIndex;
+    });
     if (letterIndex !== -1) {
       arrayNewStr.push(arrayEncryptedAlphabet[letterIndex]);
+    }
+    if (arrayStr[i] === ' ') {
+      arrayNewStr.push(' ');
+    }
+    if (arrayStr[i] === '?') {
+      arrayNewStr.push('?');
+    }
+    if (arrayStr[i] === '!') {
+      arrayNewStr.push('!');
     }
   }
 
@@ -283,8 +297,14 @@ function encodeToRot13(str) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  if (typeof value === 'string') {
+    return true;
+  }
+  if (value instanceof String) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -312,8 +332,21 @@ function isString(/* value */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  let cardId;
+  const cardDeck = ['A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'];
+
+  cardDeck.map((el) => {
+    if (value === el) {
+      cardId = cardDeck.indexOf(el);
+    }
+    return cardId;
+  });
+
+  return cardId;
 }
 
 
